@@ -1,26 +1,43 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.List;
+import vendingmachine.model.Product;
+import vendingmachine.view.validator.MoneyValidator;
+import vendingmachine.view.validator.ProductValidator;
+import vendingmachine.view.validator.Validator;
 
 public class InputView {
     private static final String MACHINE_MONEY_EXCEPTION = "[ERROR] 금액은 정수여야 합니다.";
+    private static final String PRODUCT_LIST_EXCEPTION = "[ERROR] 올바른 상품 정보를 입력해야 합니다.";
 
     public int readMachineMoney() {
         String input;
         do {
             input = Console.readLine();
-        } while (isMachineMoneyInvalid(input));
+        } while (isInputInvalid(input, new MoneyValidator(), MACHINE_MONEY_EXCEPTION));
         return Integer.parseInt(input);
     }
 
-    public boolean isMachineMoneyInvalid(String input) {
+    public List<Product> readProductList() {
         try {
-            InputValidator.validateNumeric(input);
-            InputValidator.validateInteger(input);
+            String input = Console.readLine();
+            new ProductValidator().validateInput(input);
+            return StringUtility.convertInputToProductList(input);
+        } catch (IllegalArgumentException exception) {
+            exception.printStackTrace();
+            System.out.println(PRODUCT_LIST_EXCEPTION);
+            return readProductList();
+        }
+    }
+
+    public boolean isInputInvalid(String input, Validator validator, String errorMessage) {
+        try {
+            validator.validateInput(input);
             return false;
         } catch (IllegalArgumentException exception) {
             exception.printStackTrace();
-            System.out.println(MACHINE_MONEY_EXCEPTION);
+            System.out.println(errorMessage);
             return true;
         }
     }

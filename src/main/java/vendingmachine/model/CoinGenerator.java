@@ -14,6 +14,7 @@ public class CoinGenerator {
     private static final int MINIMUM_COIN_VALUE = 10;
     private static final int INITIAL_VALUE = 0;
     private static final int INCREMENT_VALUE = 1;
+
     public LinkedHashMap<Coin, Integer> generateCoins(int money) {
         LinkedHashMap<Coin, Integer> coins = initializeCoins();
         while (money >= MINIMUM_COIN_VALUE) {

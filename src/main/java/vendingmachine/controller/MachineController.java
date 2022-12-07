@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.model.VendingMachine;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -13,7 +14,8 @@ public class MachineController {
     }
 
     public void startMachine() {
-        getMachineMoney();
+        VendingMachine vendingMachine = new VendingMachine(getMachineMoney());
+        outputView.printAllCoins(vendingMachine.getCoins());
     }
 
     public int getMachineMoney() {

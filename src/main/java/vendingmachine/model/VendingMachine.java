@@ -1,17 +1,19 @@
 package vendingmachine.model;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.Map;
 
 public class VendingMachine {
     private int initialMoney;
-    private LinkedHashMap<Coin, Integer> coins;
+    private Map<Coin, Integer> coins;
 
     public VendingMachine(int initialMoney) {
         this.initialMoney = initialMoney;
         coins = new CoinGenerator().generateCoins(initialMoney);
     }
 
+    public Map<Coin, Integer> getCoins() {
+        return Collections.unmodifiableMap(coins);
+    }
 
 }

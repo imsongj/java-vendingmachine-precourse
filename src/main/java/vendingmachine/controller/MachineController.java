@@ -20,4 +20,8 @@ public class MachineController {
         outputView.askMachineMoney();
         return inputView.readMachineMoney();
     }
+
+    public int generateCoins() {
+       return 0;
+    }
 }

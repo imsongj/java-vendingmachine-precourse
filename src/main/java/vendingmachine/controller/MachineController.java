@@ -7,6 +7,7 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class MachineController {
+    private static final String PURCHASE_EXCEPTION = "[ERROR] 구매할 수 없는 상품입니다.";
     private final InputView inputView;
     private final OutputView outputView;
 
@@ -36,5 +37,24 @@ public class MachineController {
     public int getInsertMoney() {
         outputView.askInsertMoney();
         return inputView.readInsertMoney();
+    }
+
+    public String getPurchase(VendingMachine vendingMachine) {
+        outputView.askPurchase();
+        try {
+            String input = inputView.readPurchase();
+            tryPurchase(vendingMachine, input);
+            return input;
+        } catch (IllegalArgumentException exception) {
+            exception.printStackTrace();
+            System.out.println(PURCHASE_EXCEPTION);
+            return getPurchase(vendingMachine);
+        }
+    }
+
+    public void tryPurchase(VendingMachine vendingMachine, String name) {
+        if (!vendingMachine.isValidPurchase(name)) {
+            throw new IllegalArgumentException();
+        }
     }
 }

@@ -39,6 +39,10 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
+    public String readPurchase() {
+        return Console.readLine();
+    }
+
     public boolean isInputInvalid(String input, Validator validator, String errorMessage) {
         try {
             validator.validateInput(input);

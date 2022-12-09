@@ -18,7 +18,8 @@ public class MachineController {
     public void startMachine() {
         VendingMachine vendingMachine = new VendingMachine(getMachineMoney());
         outputView.printAllCoins(vendingMachine.getCoins());
-        getProducts();
+        vendingMachine.initializeProducts(getProducts());
+        vendingMachine.insertMoney(getInsertMoney());
     }
 
     public int getMachineMoney() {
@@ -29,5 +30,10 @@ public class MachineController {
     public List<Product> getProducts() {
         outputView.askProducts();
         return inputView.readProductList();
+    }
+
+    public int getInsertMoney() {
+        outputView.askInsertMoney();
+        return inputView.readInsertMoney();
     }
 }

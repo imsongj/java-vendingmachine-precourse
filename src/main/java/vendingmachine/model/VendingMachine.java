@@ -8,6 +8,7 @@ public class VendingMachine {
     private int initialMoney;
     private Map<Coin, Integer> coins;
     private List<Product> products;
+    private int insertedMoney;
 
     public VendingMachine(int initialMoney) {
         this.initialMoney = initialMoney;
@@ -16,6 +17,10 @@ public class VendingMachine {
 
     public void initializeProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public void insertMoney(int money) {
+        this.insertedMoney = money;
     }
 
     public Map<Coin, Integer> getCoins() {

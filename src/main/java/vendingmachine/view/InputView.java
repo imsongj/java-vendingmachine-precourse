@@ -31,6 +31,14 @@ public class InputView {
         }
     }
 
+    public int readInsertMoney() {
+        String input;
+        do {
+            input = Console.readLine();
+        } while (isInputInvalid(input, new MoneyValidator(), MACHINE_MONEY_EXCEPTION));
+        return Integer.parseInt(input);
+    }
+
     public boolean isInputInvalid(String input, Validator validator, String errorMessage) {
         try {
             validator.validateInput(input);

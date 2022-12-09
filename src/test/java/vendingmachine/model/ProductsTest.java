@@ -6,13 +6,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.Arrays;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class ProductsTest {
     @ParameterizedTest
-    @MethodSource("provideParametersForProducts")
+    @MethodSource("provideParametersForPurchase")
     @DisplayName("상품을 구매할 수 있는지 반환한다.")
     void returnTrueIfProductIsPurchasable(int money, String name) {
         Products products = new Products(Arrays.asList(new Product("apple", 1000, 3),
@@ -22,11 +23,32 @@ public class ProductsTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    private static Stream<Arguments> provideParametersForProducts() {
+    private static Stream<Arguments> provideParametersForPurchase() {
         return Stream.of(
                 Arguments.of(900, "apple"),
                 Arguments.of(1000, "banana"),
                 Arguments.of(3000, "kiwi")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideParametersForProducts")
+    @DisplayName("구매할 수 있는 상품이 존재하는지 확인한다")
+    void returnTrueIfEveryProductIsNotPurchasable(Products products, boolean result) {
+        assertThat(products.cannotPurchaseAnyProduct(900)).isEqualTo(result);
+    }
+
+    private static Stream<Arguments> provideParametersForProducts() {
+        return Stream.of(
+                Arguments.of(new Products(Arrays.asList(new Product("apple", 1000, 3),
+                        new Product("banana", 3000, 3),
+                        new Product("kiwi", 1000, 0))), true),
+                Arguments.of(new Products(Arrays.asList(new Product("apple", 1000, 3),
+                        new Product("banana", 3000, 3),
+                        new Product("kiwi", 800, 0))), true),
+                Arguments.of(new Products(Arrays.asList(new Product("apple", 800, 3),
+                        new Product("banana", 3000, 3),
+                        new Product("kiwi", 1000, 0))), false)
         );
     }
 }

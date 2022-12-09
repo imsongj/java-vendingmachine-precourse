@@ -23,6 +23,14 @@ public class VendingMachine {
         this.insertedMoney = money;
     }
 
+    public Map<Coin, Integer> getCoins() {
+        return Collections.unmodifiableMap(coins);
+    }
+
+    public int getMoney() {
+        return insertedMoney;
+    }
+
     public void isValidPurchase(String name) {
         if(!products.doesProductExists(name)) {
             throw new IllegalArgumentException();
@@ -34,11 +42,8 @@ public class VendingMachine {
         insertedMoney -= products.buyProduct(name);
     }
 
-    public Map<Coin, Integer> getCoins() {
-        return Collections.unmodifiableMap(coins);
+    public boolean isOpen() {
+        return !products.cannotPurchaseAnyProduct(insertedMoney);
     }
 
-    public int getMoney() {
-        return insertedMoney;
-    }
 }

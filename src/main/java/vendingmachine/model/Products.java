@@ -33,4 +33,9 @@ public class Products {
         }
         throw new IllegalArgumentException();
     }
+
+    public boolean cannotPurchaseAnyProduct(int money) {
+        return products.stream()
+                .noneMatch(product -> product.canPurchase(money));
+    }
 }

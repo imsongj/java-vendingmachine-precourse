@@ -20,6 +20,11 @@ public class MachineController {
         VendingMachine vendingMachine = new VendingMachine(getMachineMoney());
         outputView.printAllCoins(vendingMachine.getCoins());
         vendingMachine.initializeProducts(getProducts());
+        insertMoney(vendingMachine);
+        vendingMachine.buyProduct(getPurchase(vendingMachine));
+    }
+
+    public void insertMoney(VendingMachine vendingMachine) {
         vendingMachine.insertMoney(getInsertMoney());
         outputView.printInsertMoney(vendingMachine.getMoney());
     }
@@ -43,18 +48,12 @@ public class MachineController {
         outputView.askPurchase();
         try {
             String input = inputView.readPurchase();
-            tryPurchase(vendingMachine, input);
+            vendingMachine.isValidPurchase(input);
             return input;
         } catch (IllegalArgumentException exception) {
             exception.printStackTrace();
             System.out.println(PURCHASE_EXCEPTION);
             return getPurchase(vendingMachine);
-        }
-    }
-
-    public void tryPurchase(VendingMachine vendingMachine, String name) {
-        if (!vendingMachine.isValidPurchase(name)) {
-            throw new IllegalArgumentException();
         }
     }
 }

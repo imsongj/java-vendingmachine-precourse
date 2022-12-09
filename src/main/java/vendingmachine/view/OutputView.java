@@ -11,7 +11,7 @@ public class OutputView {
     private static final String COIN_FORMAT = "%d원 - %d개%n";
     private static final String ASK_PRODUCTS = "\n상품명과 가격, 수량을 입력해 주세요.";
     private static final String ASK_INSERT_MONEY = "\n투입 금액을 입력해 주세요.";
-    private static final String MONEY_FORMAT = "투입 금액: %d원%n";
+    private static final String MONEY_FORMAT = "%n투입 금액: %d원%n";
     private static final String ASK_Purchase = "구매할 상품명을 입력해 주세요.";
 
     public void askMachineMoney() {

@@ -19,7 +19,6 @@ public class StringUtility {
             String[] values = productInput.split(VALUE_DELIMITER);
             products.add(new Product(values[NAME_INDEX],
                     Integer.parseInt(values[PRICE_INDEX]), Integer.parseInt(values[UNIT_INDEX])));
-            System.out.println(values[NAME_INDEX]);
         }
         return products;
     }

@@ -5,7 +5,7 @@ public class Product {
     private static final int PRICE_MULTIPLIER = 10;
     private final String name;
     private final int price;
-    private final int unit;
+    private int unit;
 
     public Product(String name, int price, int unit) {
         this.name = name;
@@ -26,5 +26,10 @@ public class Product {
 
     public boolean canPurchase(int money) {
         return price <= money && unit > 0;
+    }
+
+    public int buy() {
+        unit--;
+        return price;
     }
 }

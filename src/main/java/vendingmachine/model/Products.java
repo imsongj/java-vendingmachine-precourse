@@ -17,12 +17,20 @@ public class Products {
                 .contains(name);
     }
 
-    public boolean canPurchase(String name, int insertedMoney) {
+    public void canPurchase(String name, int insertedMoney) {
         for (Product product : products) {
-            if (product.getName().equals(name)) {
-                return product.canPurchase(insertedMoney);
+            if (product.getName().equals(name) && !product.canPurchase(insertedMoney)) {
+                throw new IllegalArgumentException();
             }
         }
-        return false;
+    }
+
+    public int buyProduct(String name) {
+        for (Product product : products) {
+            if (product.getName().equals(name)) {
+                return product.buy();
+            }
+        }
+        throw new IllegalArgumentException();
     }
 }

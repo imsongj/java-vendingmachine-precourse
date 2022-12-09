@@ -3,11 +3,10 @@ package vendingmachine.model;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class VendingMachine {
-    private int initialMoney;
-    private Map<Coin, Integer> coins;
+    private final int initialMoney;
+    private final Map<Coin, Integer> coins;
     private Products products;
     private int insertedMoney;
 
@@ -24,11 +23,15 @@ public class VendingMachine {
         this.insertedMoney = money;
     }
 
-    public boolean isValidPurchase(String name) {
-        if(products.doesProductExists(name)) {
-            return products.canPurchase(name, insertedMoney);
+    public void isValidPurchase(String name) {
+        if(!products.doesProductExists(name)) {
+            throw new IllegalArgumentException();
         }
-        return false;
+        products.canPurchase(name, insertedMoney);
+    }
+
+    public void buyProduct(String name) {
+        insertedMoney -= products.buyProduct(name);
     }
 
     public Map<Coin, Integer> getCoins() {

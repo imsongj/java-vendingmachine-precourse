@@ -11,6 +11,7 @@ public class OutputView {
     private static final String COIN_FORMAT = "%d원 - %d개%n";
     private static final String ASK_PRODUCTS = "\n상품명과 가격, 수량을 입력해 주세요.";
     private static final String ASK_INSERT_MONEY = "\n투입 금액을 입력해 주세요.";
+    private static final String MONEY_FORMAT = "투입 금액: %d원%n";
 
     public void askMachineMoney() {
         System.out.println(ASK_MACHINE_MONEY);
@@ -22,6 +23,10 @@ public class OutputView {
 
     public void askInsertMoney() {
         System.out.println(ASK_INSERT_MONEY);
+    }
+
+    public void printInsertMoney(int money) {
+        System.out.printf(MONEY_FORMAT, money);
     }
 
     public void printAllCoins(Map<Coin, Integer> coins) {

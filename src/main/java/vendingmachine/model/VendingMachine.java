@@ -26,4 +26,8 @@ public class VendingMachine {
     public Map<Coin, Integer> getCoins() {
         return Collections.unmodifiableMap(coins);
     }
+
+    public int getMoney() {
+        return insertedMoney;
+    }
 }

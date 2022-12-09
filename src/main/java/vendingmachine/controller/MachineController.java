@@ -20,6 +20,7 @@ public class MachineController {
         outputView.printAllCoins(vendingMachine.getCoins());
         vendingMachine.initializeProducts(getProducts());
         vendingMachine.insertMoney(getInsertMoney());
+        outputView.printInsertMoney(vendingMachine.getMoney());
     }
 
     public int getMachineMoney() {

@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 public class VendingMachine {
-    private final int initialMoney;
+    private final Money machineMoney;
     private final Map<Coin, Integer> coins;
     private Products products;
     private int insertedMoney;
 
-    public VendingMachine(int initialMoney) {
-        this.initialMoney = initialMoney;
-        coins = new CoinGenerator().generateCoins(initialMoney);
+    public VendingMachine(Money machineMoney) {
+        this.machineMoney = machineMoney;
+        coins = new CoinGenerator().generateCoins(machineMoney.getAmount());
     }
 
     public void initializeProducts(List<Product> products) {

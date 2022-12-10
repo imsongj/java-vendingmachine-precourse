@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
+import vendingmachine.GameMessage;
 import vendingmachine.model.Product;
 import vendingmachine.view.validator.MoneyValidator;
 import vendingmachine.view.validator.ProductValidator;
@@ -11,12 +12,9 @@ public class InputView {
     private static final String MACHINE_MONEY_EXCEPTION = "[ERROR] 금액은 정수여야 합니다.";
     private static final String PRODUCT_LIST_EXCEPTION = "[ERROR] 올바른 상품 정보를 입력해야 합니다.";
 
-    public int readMachineMoney() {
-        String input;
-        do {
-            input = Console.readLine();
-        } while (isInputInvalid(input, new MoneyValidator(), MACHINE_MONEY_EXCEPTION));
-        return Integer.parseInt(input);
+    public String readMachineMoney() {
+        OutputView.printMessage(GameMessage.ASK_MACHINE_MONEY);
+        return Console.readLine();
     }
 
     public List<Product> readProductList() {

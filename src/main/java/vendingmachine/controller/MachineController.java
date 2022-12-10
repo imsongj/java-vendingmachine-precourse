@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import java.util.List;
+import vendingmachine.model.Money;
 import vendingmachine.model.Product;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.view.InputView;
@@ -17,7 +18,7 @@ public class MachineController {
     }
 
     public void startMachine() {
-        VendingMachine vendingMachine = new VendingMachine(getMachineMoney());
+        VendingMachine vendingMachine = new VendingMachine(getMachineMoneyFromInput());
         outputView.printAllCoins(vendingMachine.getCoins());
         vendingMachine.initializeProducts(getProducts());
         insertMoney(vendingMachine);
@@ -29,23 +30,30 @@ public class MachineController {
         outputView.printInsertMoney(vendingMachine.getMoney());
     }
 
-    public int getMachineMoney() {
-        outputView.askMachineMoney();
-        return inputView.readMachineMoney();
+    public void purchase(VendingMachine vendingMachine) {
+        while (vendingMachine.isOpen()) {
+
+        }
+    }
+
+    public Money getMachineMoneyFromInput() {
+        try {
+            return new Money(inputView.readMachineMoney());
+        } catch (IllegalArgumentException exception) {
+            outputView.printException(exception);
+            return getMachineMoneyFromInput();
+        }
     }
 
     public List<Product> getProducts() {
-        outputView.askProducts();
         return inputView.readProductList();
     }
 
     public int getInsertMoney() {
-        outputView.askInsertMoney();
         return inputView.readInsertMoney();
     }
 
     public String getPurchase(VendingMachine vendingMachine) {
-        outputView.askPurchase();
         try {
             String input = inputView.readPurchase();
             vendingMachine.isValidPurchase(input);

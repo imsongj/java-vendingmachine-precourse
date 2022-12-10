@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.message;
 
 public class ErrorMessage {
     public static final String MACHINE_MONEY_EXCEPTION = "[ERROR] 금액은 정수여야 합니다.";

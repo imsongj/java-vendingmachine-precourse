@@ -1,8 +1,10 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
+
 import java.util.List;
-import vendingmachine.GameMessage;
+
+import vendingmachine.message.GameMessage;
 import vendingmachine.model.Product;
 import vendingmachine.view.validator.MoneyValidator;
 import vendingmachine.view.validator.ProductValidator;

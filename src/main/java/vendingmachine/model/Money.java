@@ -1,7 +1,7 @@
 package vendingmachine.model;
 
 import java.util.regex.Pattern;
-import vendingmachine.ErrorMessage;
+import vendingmachine.message.ErrorMessage;
 
 public class Money {
     private static final String NUMERIC_PATTERN = "^[0-9]*$";

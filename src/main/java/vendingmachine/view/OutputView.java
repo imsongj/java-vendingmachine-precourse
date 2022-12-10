@@ -1,9 +1,9 @@
 package vendingmachine.view;
 
-import java.util.Map;
-
 import java.util.Map.Entry;
+
 import vendingmachine.model.Coin;
+import vendingmachine.model.Coins;
 
 public class OutputView {
 
@@ -24,9 +24,9 @@ public class OutputView {
         System.out.printf(MONEY_FORMAT, money);
     }
 
-    public void printAllCoins(Map<Coin, Integer> coins) {
+    public void printAllCoins(Coins coins) {
         System.out.println(COINS_HEADER);
-        for (Entry<Coin, Integer> entry : coins.entrySet()) {
+        for (Entry<Coin, Integer> entry : coins.getCoins().entrySet()) {
             printCoin(entry.getKey(), entry.getValue());
         }
     }

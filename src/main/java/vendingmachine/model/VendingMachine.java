@@ -1,18 +1,16 @@
 package vendingmachine.model;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class VendingMachine {
     private final Money machineMoney;
-    private final Map<Coin, Integer> coins;
+    private final Coins coins;
     private Products products;
     private int insertedMoney;
 
     public VendingMachine(Money machineMoney) {
         this.machineMoney = machineMoney;
-        coins = new CoinGenerator().generateCoins(machineMoney.getAmount());
+        coins = new Coins(machineMoney.getAmount());
     }
 
     public void initializeProducts(List<Product> products) {
@@ -23,8 +21,8 @@ public class VendingMachine {
         this.insertedMoney = money;
     }
 
-    public Map<Coin, Integer> getCoins() {
-        return Collections.unmodifiableMap(coins);
+    public Coins getCoins() {
+        return coins;
     }
 
     public int getMoney() {

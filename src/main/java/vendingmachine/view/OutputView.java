@@ -4,6 +4,7 @@ import java.util.Map.Entry;
 
 import vendingmachine.model.Coin;
 import vendingmachine.model.Coins;
+import vendingmachine.model.Money;
 
 public class OutputView {
 
@@ -20,8 +21,8 @@ public class OutputView {
         System.out.println(exception.getMessage());
     }
 
-    public void printInsertMoney(int money) {
-        System.out.printf(MONEY_FORMAT, money);
+    public void printInsertMoney(Money money) {
+        System.out.printf(MONEY_FORMAT, money.getAmount());
     }
 
     public void printAllCoins(Coins coins) {

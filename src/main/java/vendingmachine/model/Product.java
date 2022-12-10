@@ -19,7 +19,6 @@ public class Product {
     public Product(String productInput) {
         validateProductInput(productInput);
         String[] values = convertStringToArray(productInput);
-
         this.name = values[NAME_INDEX];
         this.price = Integer.parseInt(values[PRICE_INDEX]);
         validatePrice(price);

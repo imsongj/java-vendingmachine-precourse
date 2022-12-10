@@ -4,7 +4,7 @@ public class VendingMachine {
     private final Money machineMoney;
     private final Coins coins;
     private Products products;
-    private int insertedMoney;
+    private Money insertedMoney;
 
     public VendingMachine(Money machineMoney) {
         this.machineMoney = machineMoney;
@@ -15,15 +15,15 @@ public class VendingMachine {
         this.products = products;
     }
 
-    public void insertMoney(int money) {
-        this.insertedMoney = money;
+    public void insertMoney(Money insertedMoney) {
+        this.insertedMoney = insertedMoney;
     }
 
     public Coins getCoins() {
         return coins;
     }
 
-    public int getMoney() {
+    public Money getInsertedMoney() {
         return insertedMoney;
     }
 
@@ -31,15 +31,15 @@ public class VendingMachine {
         if(!products.doesProductExists(name)) {
             throw new IllegalArgumentException();
         }
-        products.canPurchase(name, insertedMoney);
+        products.canPurchase(name, insertedMoney.getAmount());
     }
 
     public void buyProduct(String name) {
-        insertedMoney -= products.buyProduct(name);
+        insertedMoney.spend(products.buyProduct(name));
     }
 
     public boolean isOpen() {
-        return !products.cannotPurchaseAnyProduct(insertedMoney);
+        return !products.cannotPurchaseAnyProduct(insertedMoney.getAmount());
     }
 
 }

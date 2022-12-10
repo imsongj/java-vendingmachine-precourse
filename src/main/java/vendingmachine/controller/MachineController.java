@@ -17,17 +17,22 @@ public class MachineController {
         outputView = new OutputView();
     }
 
-    public void startMachine() {
-        VendingMachine vendingMachine = new VendingMachine(getMachineMoneyFromInput());
-        outputView.printAllCoins(vendingMachine.getCoins());
-        vendingMachine.initializeProducts(getProducts());
+    public void start() {
+        VendingMachine vendingMachine = initializeVendingMachine();
         insertMoney(vendingMachine);
         vendingMachine.buyProduct(getPurchase(vendingMachine));
     }
 
+    public VendingMachine initializeVendingMachine() {
+        VendingMachine vendingMachine = new VendingMachine(getMachineMoney());
+        outputView.printAllCoins(vendingMachine.getCoins());
+        vendingMachine.initializeProducts(getProducts());
+        return vendingMachine;
+    }
+
     public void insertMoney(VendingMachine vendingMachine) {
         vendingMachine.insertMoney(getInsertMoney());
-        outputView.printInsertMoney(vendingMachine.getMoney());
+        outputView.printInsertMoney(vendingMachine.getInsertedMoney());
     }
 
     public void purchase(VendingMachine vendingMachine) {
@@ -36,12 +41,12 @@ public class MachineController {
         }
     }
 
-    public Money getMachineMoneyFromInput() {
+    public Money getMachineMoney() {
         try {
             return new Money(inputView.readMachineMoney());
         } catch (IllegalArgumentException exception) {
             outputView.printException(exception);
-            return getMachineMoneyFromInput();
+            return getMachineMoney();
         }
     }
 
@@ -54,8 +59,13 @@ public class MachineController {
         }
     }
 
-    public int getInsertMoney() {
-        return inputView.readInsertMoney();
+    public Money getInsertMoney() {
+        try {
+            return new Money(inputView.readInsertMoney());
+        } catch (IllegalArgumentException exception) {
+            outputView.printException(exception);
+            return getInsertMoney();
+        }
     }
 
     public String getPurchase(VendingMachine vendingMachine) {

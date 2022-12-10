@@ -6,7 +6,7 @@ import vendingmachine.message.ErrorMessage;
 public class Money {
     private static final String NUMERIC_PATTERN = "^[0-9]*$";
 
-    private final int amount;
+    private int amount;
 
     public Money(String amountInput) {
         validateNumeric(amountInput);
@@ -34,5 +34,9 @@ public class Money {
 
     public int getAmount() {
         return amount;
+    }
+
+    public void spend(int amount) {
+        this.amount -= amount;
     }
 }

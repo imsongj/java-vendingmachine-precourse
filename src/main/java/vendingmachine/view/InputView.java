@@ -21,6 +21,7 @@ public class InputView {
     }
 
     public String readPurchase() {
+        OutputView.printMessage(GameMessage.ASK_PURCHASE);
         return Console.readLine();
     }
 }

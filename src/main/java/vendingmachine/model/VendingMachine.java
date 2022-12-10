@@ -27,15 +27,15 @@ public class VendingMachine {
         return insertedMoney;
     }
 
-    public void isValidPurchase(String name) {
-        if(!products.doesProductExists(name)) {
+    public void isValidPurchase(String productName) {
+        if(!products.doesProductExists(productName)) {
             throw new IllegalArgumentException();
         }
-        products.canPurchase(name, insertedMoney.getAmount());
+        products.canPurchase(productName, insertedMoney.getAmount());
     }
 
-    public void buyProduct(String name) {
-        insertedMoney.spend(products.buyProduct(name));
+    public void buyProduct(String productName) {
+        insertedMoney.spend(products.buyProduct(productName));
     }
 
     public boolean isOpen() {

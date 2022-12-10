@@ -12,6 +12,7 @@ import vendingmachine.message.ErrorMessage;
 public class Products {
     private static final String PRODUCT_PATTERN = "^\\[.*]$";
     private static final String PRODUCT_DELIMITER = ";";
+
     private final List<Product> products;
 
     public Products(String productsInput) {
@@ -59,7 +60,7 @@ public class Products {
     public void canPurchase(String name, int insertedMoney) {
         for (Product product : products) {
             if (product.getName().equals(name) && !product.canPurchase(insertedMoney)) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(ErrorMessage.PURCHASE_EXCEPTION);
             }
         }
     }
@@ -70,7 +71,7 @@ public class Products {
                 return product.buy();
             }
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(ErrorMessage.PURCHASE_EXCEPTION);
     }
 
     public boolean cannotPurchaseAnyProduct(int money) {

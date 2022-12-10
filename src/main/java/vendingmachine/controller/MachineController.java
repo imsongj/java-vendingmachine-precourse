@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.message.ErrorMessage;
 import vendingmachine.model.Money;
 
 import vendingmachine.model.Products;
@@ -8,7 +9,6 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class MachineController {
-    private static final String PURCHASE_EXCEPTION = "[ERROR] 구매할 수 없는 상품입니다.";
     private final InputView inputView;
     private final OutputView outputView;
 
@@ -20,7 +20,7 @@ public class MachineController {
     public void start() {
         VendingMachine vendingMachine = initializeVendingMachine();
         insertMoney(vendingMachine);
-        vendingMachine.buyProduct(getPurchase(vendingMachine));
+
     }
 
     public VendingMachine initializeVendingMachine() {
@@ -37,7 +37,7 @@ public class MachineController {
 
     public void purchase(VendingMachine vendingMachine) {
         while (vendingMachine.isOpen()) {
-
+            vendingMachine.buyProduct(getPurchase(vendingMachine));
         }
     }
 
@@ -74,8 +74,7 @@ public class MachineController {
             vendingMachine.isValidPurchase(input);
             return input;
         } catch (IllegalArgumentException exception) {
-            exception.printStackTrace();
-            System.out.println(PURCHASE_EXCEPTION);
+            outputView.printException(exception);
             return getPurchase(vendingMachine);
         }
     }

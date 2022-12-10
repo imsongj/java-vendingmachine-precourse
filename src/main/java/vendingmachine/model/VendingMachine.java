@@ -1,13 +1,13 @@
 package vendingmachine.model;
 
+import vendingmachine.message.ErrorMessage;
+
 public class VendingMachine {
-    private final Money machineMoney;
     private final Coins coins;
     private Products products;
     private Money insertedMoney;
 
     public VendingMachine(Money machineMoney) {
-        this.machineMoney = machineMoney;
         coins = new Coins(machineMoney.getAmount());
     }
 
@@ -27,9 +27,13 @@ public class VendingMachine {
         return insertedMoney;
     }
 
+    public Coins getChanges() {
+        return coins.getMinimumCoins(insertedMoney.getAmount());
+    }
+
     public void isValidPurchase(String productName) {
         if(!products.doesProductExists(productName)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.PURCHASE_EXCEPTION);
         }
         products.canPurchase(productName, insertedMoney.getAmount());
     }

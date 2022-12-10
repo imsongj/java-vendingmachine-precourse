@@ -15,4 +15,13 @@ public enum Coin {
     public int getAmount() {
         return amount;
     }
+
+    public static Coin of(int amount) {
+        for (Coin coin : Coin.values()) {
+            if (coin.getAmount() == amount) {
+                return coin;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
 }

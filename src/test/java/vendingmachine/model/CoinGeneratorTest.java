@@ -15,7 +15,7 @@ public class CoinGeneratorTest {
     @Test
     @DisplayName("0부터 3을 포함한 리스트를 생성한다.")
     void generateNumberList() {
-        assertThat(new CoinGenerator().generateNumberList()).isEqualTo(Arrays.asList(0,1,2,3));
+        assertThat(new CoinGenerator().generateNumberList()).isEqualTo(Arrays.asList(500, 100, 50, 10));
     }
 
     @ParameterizedTest

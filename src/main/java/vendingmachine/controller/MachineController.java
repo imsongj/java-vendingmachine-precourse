@@ -1,6 +1,5 @@
 package vendingmachine.controller;
 
-import vendingmachine.message.ErrorMessage;
 import vendingmachine.model.Money;
 
 import vendingmachine.model.Products;
@@ -19,26 +18,28 @@ public class MachineController {
 
     public void start() {
         VendingMachine vendingMachine = initializeVendingMachine();
-        insertMoney(vendingMachine);
-
+        vendingMachine.insertMoney(getInsertMoney());
+        purchase(vendingMachine);
+        end(vendingMachine);
     }
 
     public VendingMachine initializeVendingMachine() {
         VendingMachine vendingMachine = new VendingMachine(getMachineMoney());
-        outputView.printAllCoins(vendingMachine.getCoins());
+        outputView.printInitialCoins(vendingMachine.getCoins());
         vendingMachine.initializeProducts(getProducts());
         return vendingMachine;
     }
 
-    public void insertMoney(VendingMachine vendingMachine) {
-        vendingMachine.insertMoney(getInsertMoney());
-        outputView.printInsertMoney(vendingMachine.getInsertedMoney());
-    }
-
     public void purchase(VendingMachine vendingMachine) {
         while (vendingMachine.isOpen()) {
+            outputView.printInsertMoney(vendingMachine.getInsertedMoney());
             vendingMachine.buyProduct(getPurchase(vendingMachine));
         }
+    }
+
+    public void end(VendingMachine vendingMachine) {
+        outputView.printInsertMoney(vendingMachine.getInsertedMoney());
+        outputView.printChanges(vendingMachine.getChanges());
     }
 
     public Money getMachineMoney() {

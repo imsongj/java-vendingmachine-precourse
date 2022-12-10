@@ -13,6 +13,8 @@ public class OutputView {
 
     private static final String MONEY_FORMAT = "%n투입 금액: %d원%n";
 
+    private static final String CHANGES_HEADER = "잔돈";
+
     public static void printMessage(String message) {
         System.out.println(message);
     }
@@ -25,8 +27,17 @@ public class OutputView {
         System.out.printf(MONEY_FORMAT, money.getAmount());
     }
 
-    public void printAllCoins(Coins coins) {
+    public void printInitialCoins(Coins coins) {
         System.out.println(COINS_HEADER);
+        printCoins(coins);
+    }
+
+    public void printChanges(Coins coins) {
+        System.out.println(CHANGES_HEADER);
+        printCoins(coins);
+    }
+
+    public void printCoins(Coins coins) {
         for (Entry<Coin, Integer> entry : coins.getCoins().entrySet()) {
             printCoin(entry.getKey(), entry.getValue());
         }

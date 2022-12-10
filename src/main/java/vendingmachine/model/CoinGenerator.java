@@ -6,10 +6,8 @@ import java.util.LinkedHashMap;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class CoinGenerator {
-    private static final int NUMBER_OF_COIN_TYPES = 4;
     private static final int MINIMUM_COIN_VALUE = 10;
     private static final int INITIAL_VALUE = 0;
     private static final int INCREMENT_VALUE = 1;
@@ -28,7 +26,7 @@ public class CoinGenerator {
         List<Integer> numbers = generateNumberList();
         Coin coin;
         do {
-            coin = Coin.values()[Randoms.pickNumberInList(numbers)];
+            coin = Coin.of(Randoms.pickNumberInList(numbers));
         } while (coin.getAmount() > maxValue);
         return coin;
     }
@@ -41,8 +39,8 @@ public class CoinGenerator {
     }
 
     public List<Integer> generateNumberList() {
-        return IntStream.range(INITIAL_VALUE, NUMBER_OF_COIN_TYPES)
-                .boxed()
+        return Arrays.stream(Coin.values())
+                .map(Coin::getAmount)
                 .collect(Collectors.toList());
     }
 }

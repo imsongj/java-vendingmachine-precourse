@@ -57,8 +57,8 @@ public class ProductValidatorTest {
     @Test
     @DisplayName("상품 중 중복된 이름이 존재하면 예외를 발생시킨다.")
     void throwExceptionForDuplicate() {
-        List<Product> products = Arrays.asList(new Product("콜라", 1000, 1),
-                new Product("콜라", 100, 1));
+        List<Product> products = Arrays.asList(new Product("[콜라,3000,1]"),
+                new Product("[콜라,2000,3]"));
         assertThatThrownBy(() -> new ProductValidator().validateDuplicateName(products))
                 .isInstanceOf(IllegalArgumentException.class);
     }

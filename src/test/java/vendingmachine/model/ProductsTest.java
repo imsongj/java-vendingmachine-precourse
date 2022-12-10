@@ -16,9 +16,7 @@ public class ProductsTest {
     @MethodSource("provideParametersForPurchase")
     @DisplayName("상품을 구매할 수 있는지 반환한다.")
     void returnTrueIfProductIsPurchasable(int money, String name) {
-        Products products = new Products(Arrays.asList(new Product("apple", 1000, 3),
-                new Product("banana", 3000, 3),
-                new Product("kiwi", 1000, 0)));
+        Products products = new Products("[apple,1000,3];[banana,3000,1];[kiwi,1000,0]");
         assertThatThrownBy(() -> products.canPurchase(name, money))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -40,15 +38,9 @@ public class ProductsTest {
 
     private static Stream<Arguments> provideParametersForProducts() {
         return Stream.of(
-                Arguments.of(new Products(Arrays.asList(new Product("apple", 1000, 3),
-                        new Product("banana", 3000, 3),
-                        new Product("kiwi", 1000, 0))), true),
-                Arguments.of(new Products(Arrays.asList(new Product("apple", 1000, 3),
-                        new Product("banana", 3000, 3),
-                        new Product("kiwi", 800, 0))), true),
-                Arguments.of(new Products(Arrays.asList(new Product("apple", 800, 3),
-                        new Product("banana", 3000, 3),
-                        new Product("kiwi", 1000, 0))), false)
+                Arguments.of(new Products("[apple,1000,3];[banana,3000,1];[kiwi,1000,0]"), true),
+                Arguments.of(new Products("[apple,1000,3];[banana,3000,1];[kiwi,800,0]"), true),
+                Arguments.of(new Products("[apple,900,3];[banana,3000,1];[kiwi,1000,0]"), false)
         );
     }
 }

@@ -6,7 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import vendingmachine.model.Product;
-import vendingmachine.view.StringUtility;
 
 public class ProductValidator extends Validator {
     private static final String PRODUCT_PATTERN = "^\\[.*]$";
@@ -15,12 +14,6 @@ public class ProductValidator extends Validator {
     private static final int VALUE_LENGTH = 3;
     private static final int PRICE_INDEX = 1;
     private static final int UNIT_INDEX = 2;
-
-    @Override
-    public void validateInput(String input) {
-        validateProductString(input);
-        validateDuplicateName(StringUtility.convertInputToProductList(input));
-    }
 
     public void validateProductString(String input) {
         String[] productInputs = input.split(PRODUCT_DELIMITER);

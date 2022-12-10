@@ -1,8 +1,8 @@
 package vendingmachine.controller;
 
-import java.util.List;
 import vendingmachine.model.Money;
-import vendingmachine.model.Product;
+
+import vendingmachine.model.Products;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -45,8 +45,13 @@ public class MachineController {
         }
     }
 
-    public List<Product> getProducts() {
-        return inputView.readProductList();
+    public Products getProducts() {
+        try {
+            return new Products(inputView.readProductList());
+        } catch (IllegalArgumentException exception) {
+            outputView.printException(exception);
+            return getProducts();
+        }
     }
 
     public int getInsertMoney() {

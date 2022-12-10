@@ -1,7 +1,5 @@
 package vendingmachine.model;
 
-import java.util.List;
-
 public class VendingMachine {
     private final Money machineMoney;
     private final Coins coins;
@@ -13,8 +11,8 @@ public class VendingMachine {
         coins = new Coins(machineMoney.getAmount());
     }
 
-    public void initializeProducts(List<Product> products) {
-        this.products = new Products(products);
+    public void initializeProducts(Products products) {
+        this.products = products;
     }
 
     public void insertMoney(int money) {
